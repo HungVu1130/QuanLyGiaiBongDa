@@ -1,0 +1,327 @@
+/* =========================================
+   1. VARIABLES & RESET (CẤU HÌNH MÀU SẮC)
+   ========================================= */
+:root {
+    /* Bảng màu Premier League */
+    --primary-bg: #38003c;      /* Tím than chủ đạo */
+    --accent-green: #00ff85;    /* Xanh Neon (Nút, điểm nhấn) */
+    --accent-pink: #e90052;     /* Hồng (Nút xóa, cảnh báo) */
+    --text-dark: #242424;       /* Chữ đen */
+    --text-light: #ffffff;      /* Chữ trắng */
+    --body-bg: #f0f2f5;         /* Nền web xám nhẹ */
+    --card-bg: #ffffff;         /* Nền khung trắng */
+    
+    /* Kích thước */
+    --sidebar-width: 260px;
+    --border-radius: 8px;
+    --transition-speed: 0.3s;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--body-bg);
+    color: var(--text-dark);
+    display: flex;
+    min-height: 100vh;
+}
+
+/* =========================================
+   2. SIDEBAR (MENU TRÁI)
+   ========================================= */
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--primary-bg);
+    color: var(--text-light);
+    display: flex;
+    flex-direction: column;
+    position: fixed; /* Cố định menu */
+    height: 100vh;
+    z-index: 1000;
+    box-shadow: 4px 0 10px rgba(0,0,0,0.1);
+}
+
+/* Logo giải đấu */
+.sidebar h2 {
+    text-align: center;
+    padding: 25px 0;
+    margin: 0;
+    background-color: #2a002e; /* Tím đậm hơn chút */
+    font-size: 1.4rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid var(--accent-pink);
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 16px 25px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all var(--transition-speed);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 500;
+}
+
+/* Hiệu ứng khi di chuột hoặc đang chọn */
+.sidebar a:hover, .sidebar a.active {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--accent-green);
+    border-left: 5px solid var(--accent-green);
+    padding-left: 20px; /* Bù trừ cho border-left */
+}
+
+/* =========================================
+   3. MAIN CONTENT (NỘI DUNG CHÍNH)
+   ========================================= */
+.content {
+    margin-left: var(--sidebar-width); /* Chừa chỗ cho sidebar */
+    flex: 1;
+    padding: 40px;
+    width: calc(100% - var(--sidebar-width));
+}
+
+h1 {
+    color: var(--primary-bg);
+    margin-top: 0;
+    font-weight: 800;
+    font-size: 2rem;
+    position: relative;
+    display: inline-block;
+    margin-bottom: 30px;
+}
+
+h1::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: var(--accent-pink);
+    margin-top: 5px;
+    border-radius: 2px;
+}
+
+/* =========================================
+   4. COMPONENTS (THÀNH PHẦN GIAO DIỆN)
+   ========================================= */
+
+/* Card (Khung trắng chứa nội dung) */
+.card {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    margin-bottom: 25px;
+    border-top: 3px solid transparent;
+}
+.card:hover {
+    border-top-color: var(--accent-green); /* Hiệu ứng hover nhẹ */
+}
+
+/* Inputs & Forms */
+.form-group { margin-bottom: 20px; }
+label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.95rem; color: #555; }
+
+input, select, textarea, .form-control {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0; /* Viền dày hơn chút */
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border var(--transition-speed);
+    background-color: #fafafa;
+}
+
+input:focus, select:focus, .form-control:focus {
+    border-color: var(--primary-bg);
+    background-color: #fff;
+    outline: none;
+}
+
+/* Buttons (Nút bấm) */
+.btn {
+    padding: 10px 24px;
+    border: none;
+    border-radius: 50px; /* Nút bo tròn kiểu hiện đại */
+    cursor: pointer;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+    color: white;
+}
+
+.btn:active { transform: scale(0.98); }
+
+.btn-primary, .btn-save, .btn-add { 
+    background-color: var(--primary-bg); 
+    color: var(--accent-green); /* Chữ xanh trên nền tím */
+}
+.btn-primary:hover { 
+    box-shadow: 0 4px 10px rgba(56, 0, 60, 0.4);
+}
+
+.btn-danger, .btn-remove, .btn-delete { background-color: var(--accent-pink); color: white; }
+.btn-warning, .btn-edit { background-color: #ffc107; color: #333; }
+.btn-secondary, .btn-cancel { background-color: #95a5a6; color: white; }
+
+/* Tables (Bảng dữ liệu) */
+table {
+    width: 100%;
+    border-collapse: separate; 
+    border-spacing: 0;
+    margin-top: 15px;
+    border-radius: var(--border-radius);
+    overflow: hidden; /* Bo tròn góc bảng */
+    border: 1px solid #eee;
+}
+
+th {
+    background-color: var(--primary-bg);
+    color: white;
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+}
+
+td {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    color: #333;
+}
+
+tr:last-child td { border-bottom: none; }
+tr:hover { background-color: #f8f0fc; /* Màu tím rất nhạt khi hover */ }
+
+/* Badges (Nhãn trạng thái) */
+.badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: white;
+}
+.bg-green { background-color: #00b894; }
+.bg-orange { background-color: #e17055; }
+.bg-red { background-color: var(--accent-pink); }
+
+/* =========================================
+   5. DASHBOARD WIDGETS (Thống kê trang chủ)
+   ========================================= */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.stat-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+.stat-card:hover { transform: translateY(-5px); }
+
+/* Đường viền màu bên trái */
+.stat-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 6px;
+    background-color: var(--primary-bg);
+}
+
+.stat-title {
+    font-size: 0.85rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--primary-bg);
+}
+
+.stat-icon {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 3rem;
+    opacity: 0.1;
+    color: var(--primary-bg);
+}
+
+/* =========================================
+   6. UTILITIES (TIỆN ÍCH)
+   ========================================= */
+.search-container { display: flex; justify-content: flex-end; margin-bottom: 15px; }
+.search-box {
+    padding: 10px 20px;
+    width: 280px;
+    border: 2px solid #eee;
+    border-radius: 50px;
+    outline: none;
+    transition: all 0.3s;
+}
+.search-box:focus {
+    border-color: var(--accent-green);
+    width: 320px;
+    box-shadow: 0 0 10px rgba(0, 255, 133, 0.2);
+}
+
+/* Helper text */
+.note { font-size: 13px; color: #7f8c8d; font-style: italic; margin-top: 5px; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
+
+/* Modal styles (Dùng chung cho các trang có popup) */
+.modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(56, 0, 60, 0.8); }
+.modal-content { background-color: #fff; margin: 5% auto; padding: 30px; width: 500px; border-radius: 12px; position: relative; animation: slideDown 0.3s; }
+@keyframes slideDown { from {top: -50px; opacity: 0} to {top: 0; opacity: 1} }
+.close { position: absolute; right: 20px; top: 15px; font-size: 28px; cursor: pointer; color: #aaa; }
+.close:hover { color: var(--accent-pink); }
+.kit-picker {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.kit {
+    width: 38px;
+    height: 38px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 2px solid #ddd;
+    transition: 0.2s;
+}
+
+.kit:hover {
+    transform: scale(1.05);
+}
+
+.kit.active {
+    border: 3px solid #000;
+}
